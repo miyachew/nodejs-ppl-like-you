@@ -1,0 +1,19 @@
+version: "3"
+services:
+  app:
+    restart: always
+    build: ./
+    ports:
+      - "80:3000"
+    volumes:
+      - .:/app
+    links:
+      - mysql
+  mysql:
+    image: mysql:5.7
+    command: --max_allowed_packet=32505856
+    environment:
+        MYSQL_ROOT_PASSWORD: proj_pass
+        MYSQL_DATABASE: proj
+    ports:
+      - "3306:3306"
